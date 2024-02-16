@@ -4,6 +4,9 @@ export default defineType({
   name: 'notice',
   title: 'Notice',
   type: 'document',
+  initialValue: () => ({
+    publishedAt: new Date().toISOString()
+  }),
   fields: [
     defineField({
       name: 'title',
@@ -53,10 +56,22 @@ export default defineType({
       ]
     }),
     defineField({
-      name: 'categories',
-      title: 'Categories',
+      name: 'college',
+      title: 'College',
       type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
+      of: [{type: 'reference', to: {type: 'college'}}],
+    }),
+    defineField({
+      name: 'school',
+      title: 'School',
+      type: 'array',
+      of: [{type: 'reference', to: {type: 'school'}}],
+    }),
+    defineField({
+      name: 'department',
+      title: 'Department',
+      type: 'array',
+      of: [{type: 'reference', to: {type: 'department'}}],
     }),
     defineField({
       name: 'publishedAt',

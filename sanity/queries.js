@@ -1,57 +1,45 @@
 import { createClient, groq } from "next-sanity";
-// import { Project } from "@/types/Project";
-import {client} from './lib/client'
-// import { Page } from "@/types/Page";
+import {config} from './lib/client'
 
-export async function getProjects() {
-  return createClient(client).fetch(
-    groq`*[_type == "project"]{
+
+export async function getNotices() {
+  return createClient(config).fetch(
+    groq`*[_type == "notice"]{
       _id,
       _createdAt,
+      _updatedAt,
+      title,
       name,
       "slug": slug.current,
-      "image": image.asset->url,
+      "filePaper": filePaper.asset->url,
       url,
-      content
-    }`
+      body,
+      school,
+      department,
+      college
+    }
+    | order(_updatedAt asc)
+    `
   )
 }
 
-export async function getProject(slug) {
-  return createClient(client).fetch(
-    groq`*[_type == "project" && slug.current == $slug][0]{
+export async function getNotice(slug) {
+  return createClient(config).fetch(
+    groq`*[_type == "notice"][0]{
       _id,
       _createdAt,
+      _updatedAt,
+      title,
       name,
       "slug": slug.current,
-      "image": image.asset->url,
+      "filePaper": filePaper.asset->url,
       url,
-      content
+      body,
+      school,
+      department,
+      college
     }`,
     { slug }
   )
 }
 
-export async function getPages() {
-  return createClient(client).fetch(
-    groq`*[_type == "page"]{
-      _id,
-      _createdAt,
-      title,
-      "slug": slug.current
-    }`
-  )
-}
-
-export async function getPage(slug){
-  return createClient(client).fetch(
-    groq`*[_type == "page" && slug.current == $slug][0]{
-      _id,
-      _createdAt,
-      title,
-      "slug": slug.current,
-      content
-    }`,
-    { slug }
-  )
-}

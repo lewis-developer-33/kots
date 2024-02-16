@@ -8,3 +8,10 @@ export const client = createClient({
   projectId,
   useCdn,
 })
+
+export const config = {
+  projectId,
+  dataset,
+  apiVersion
+}
+
