@@ -14,9 +14,9 @@ export async function getNotices() {
       "filePaper": filePaper.asset->url,
       url,
       body,
-      school,
-      department,
-      college
+      school[]->{title},
+      department[]->{title},
+      college[]->{title}
     }
     | order(_updatedAt asc)
     `
@@ -35,9 +35,9 @@ export async function getNotice(slug) {
       "filePaper": filePaper.asset->url,
       url,
       body,
-      school,
-      department,
-      college
+      school[]->{title},
+      department[]->{title},
+      college[]->{title}
     }`,
     { slug }
   )

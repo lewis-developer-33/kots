@@ -16,7 +16,9 @@ const UserLayout = ({children}) => {
   return (
     <main>
         <header className=' px-4 py-4 md:px-6 shadow-lg flex items-center justify-between'>
-            <AlbumIcon/>
+            <Link href='/'>
+              <AlbumIcon/>
+            </Link>
             <div className='md:hidden'>
               <DropdownMenu >
                 <DropdownMenuTrigger>
