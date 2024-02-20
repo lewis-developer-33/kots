@@ -43,14 +43,14 @@ const Page = () => {
                 method:'POST',
                 body:JSON.stringify(user)
             })
-            if (!res.ok) {
-                toast({
-                    variant:'destructive',
-                    title: "Failed to submit the data",
-                    description: "Please try again later",
-                })
-            }
+            
             const data = await res.json()
+            if (data?.error) {
+              toast({
+                variant:'destructive',
+                title:data?.error
+              })
+            }
             console.log(data)
         } catch (error) {
             console.log(error)
